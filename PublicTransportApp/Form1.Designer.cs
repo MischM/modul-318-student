@@ -33,18 +33,22 @@
             this.tabConnection = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
-            this.btnArrival = new System.Windows.Forms.Button();
-            this.btnDeparture = new System.Windows.Forms.Button();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabStation = new System.Windows.Forms.TabPage();
-            this.txtFrom = new System.Windows.Forms.TextBox();
             this.txtTo = new System.Windows.Forms.TextBox();
             this.btnSearchConnection = new System.Windows.Forms.Button();
             this.lsvConnections = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtFrom = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -94,12 +98,11 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtFrom);
+            this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.btnSearchConnection);
             this.splitContainer1.Panel1.Controls.Add(this.txtTo);
-            this.splitContainer1.Panel1.Controls.Add(this.txtFrom);
             this.splitContainer1.Panel1.Controls.Add(this.dtpTime);
-            this.splitContainer1.Panel1.Controls.Add(this.btnArrival);
-            this.splitContainer1.Panel1.Controls.Add(this.btnDeparture);
             this.splitContainer1.Panel1.Controls.Add(this.dtpDate);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
@@ -116,33 +119,15 @@
             // dtpTime
             // 
             this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTime.Location = new System.Drawing.Point(529, 150);
+            this.dtpTime.Location = new System.Drawing.Point(431, 140);
             this.dtpTime.MinDate = new System.DateTime(2016, 1, 1, 0, 0, 0, 0);
             this.dtpTime.Name = "dtpTime";
-            this.dtpTime.Size = new System.Drawing.Size(102, 20);
+            this.dtpTime.Size = new System.Drawing.Size(200, 20);
             this.dtpTime.TabIndex = 7;
-            // 
-            // btnArrival
-            // 
-            this.btnArrival.Location = new System.Drawing.Point(435, 147);
-            this.btnArrival.Name = "btnArrival";
-            this.btnArrival.Size = new System.Drawing.Size(75, 23);
-            this.btnArrival.TabIndex = 6;
-            this.btnArrival.Text = "Arrival";
-            this.btnArrival.UseVisualStyleBackColor = true;
-            // 
-            // btnDeparture
-            // 
-            this.btnDeparture.Location = new System.Drawing.Point(354, 147);
-            this.btnDeparture.Name = "btnDeparture";
-            this.btnDeparture.Size = new System.Drawing.Size(75, 23);
-            this.btnDeparture.TabIndex = 5;
-            this.btnDeparture.Text = "Departure";
-            this.btnDeparture.UseVisualStyleBackColor = true;
             // 
             // dtpDate
             // 
-            this.dtpDate.Location = new System.Drawing.Point(86, 146);
+            this.dtpDate.Location = new System.Drawing.Point(86, 140);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(200, 20);
             this.dtpDate.TabIndex = 4;
@@ -195,14 +180,6 @@
             this.tabStation.Text = "Search Station";
             this.tabStation.UseVisualStyleBackColor = true;
             // 
-            // txtFrom
-            // 
-            this.txtFrom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFrom.Location = new System.Drawing.Point(86, 60);
-            this.txtFrom.Name = "txtFrom";
-            this.txtFrom.Size = new System.Drawing.Size(200, 20);
-            this.txtFrom.TabIndex = 8;
-            // 
             // txtTo
             // 
             this.txtTo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -213,9 +190,9 @@
             // 
             // btnSearchConnection
             // 
-            this.btnSearchConnection.Location = new System.Drawing.Point(475, 200);
+            this.btnSearchConnection.Location = new System.Drawing.Point(431, 194);
             this.btnSearchConnection.Name = "btnSearchConnection";
-            this.btnSearchConnection.Size = new System.Drawing.Size(156, 23);
+            this.btnSearchConnection.Size = new System.Drawing.Size(200, 29);
             this.btnSearchConnection.TabIndex = 10;
             this.btnSearchConnection.Text = "Search Connection";
             this.btnSearchConnection.UseVisualStyleBackColor = true;
@@ -223,6 +200,12 @@
             // 
             // lsvConnections
             // 
+            this.lsvConnections.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
             this.lsvConnections.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsvConnections.Location = new System.Drawing.Point(0, 0);
             this.lsvConnections.Name = "lsvConnections";
@@ -230,6 +213,51 @@
             this.lsvConnections.TabIndex = 0;
             this.lsvConnections.UseCompatibleStateImageBehavior = false;
             this.lsvConnections.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Departure time";
+            this.columnHeader1.Width = 100;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Arrival time";
+            this.columnHeader2.Width = 100;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Duration";
+            this.columnHeader3.Width = 100;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Departure platform";
+            this.columnHeader4.Width = 100;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Arrival platform";
+            this.columnHeader5.Width = 100;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(364, 146);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Time";
+            // 
+            // txtFrom
+            // 
+            this.txtFrom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtFrom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtFrom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtFrom.Location = new System.Drawing.Point(86, 61);
+            this.txtFrom.Name = "txtFrom";
+            this.txtFrom.Size = new System.Drawing.Size(200, 20);
+            this.txtFrom.TabIndex = 12;
+            this.txtFrom.TextChanged += new System.EventHandler(this.txtFrom_TextChanged);
             // 
             // Form1
             // 
@@ -258,16 +286,20 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpTime;
-        private System.Windows.Forms.Button btnArrival;
-        private System.Windows.Forms.Button btnDeparture;
         private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtTo;
-        private System.Windows.Forms.TextBox txtFrom;
         private System.Windows.Forms.Button btnSearchConnection;
         private System.Windows.Forms.ListView lsvConnections;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.TextBox txtFrom;
     }
 }
 

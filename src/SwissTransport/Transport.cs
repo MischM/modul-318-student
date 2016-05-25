@@ -55,6 +55,29 @@ namespace SwissTransport
 
             return null;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fromStation"></param>
+        /// <param name="toStattion"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public Connections GetConnectionsByTime(string fromStation, string toStattion, string time)
+        {
+            var request = CreateWebRequest("http://transport.opendata.ch/v1/connections?from=" + fromStation + "&to=" + toStattion + "&departion" + time);
+            var response = request.GetResponse();
+            var responseStream = response.GetResponseStream();
+
+            if (responseStream != null)
+            {
+                var readToEnd = new StreamReader(responseStream).ReadToEnd();
+                var connections =
+                    JsonConvert.DeserializeObject<Connections>(readToEnd);
+                return connections;
+            }
+
+            return null;
+        }
 
         private static WebRequest CreateWebRequest(string url)
         {
@@ -63,7 +86,7 @@ namespace SwissTransport
 
             webProxy.Credentials = CredentialCache.DefaultNetworkCredentials;
             request.Proxy = webProxy;
-            
+
             return request;
         }
     }
