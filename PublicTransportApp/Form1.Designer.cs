@@ -32,23 +32,25 @@
             this.tabStart = new System.Windows.Forms.TabPage();
             this.tabConnection = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnSearchConnection = new System.Windows.Forms.Button();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabStation = new System.Windows.Forms.TabPage();
-            this.txtTo = new System.Windows.Forms.TextBox();
-            this.btnSearchConnection = new System.Windows.Forms.Button();
             this.lsvConnections = new System.Windows.Forms.ListView();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtFrom = new System.Windows.Forms.TextBox();
+            this.tabStation = new System.Windows.Forms.TabPage();
+            this.cmbFrom = new System.Windows.Forms.ComboBox();
+            this.cmbTo = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -98,10 +100,10 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.txtFrom);
+            this.splitContainer1.Panel1.Controls.Add(this.cmbTo);
+            this.splitContainer1.Panel1.Controls.Add(this.cmbFrom);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.btnSearchConnection);
-            this.splitContainer1.Panel1.Controls.Add(this.txtTo);
             this.splitContainer1.Panel1.Controls.Add(this.dtpTime);
             this.splitContainer1.Panel1.Controls.Add(this.dtpDate);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
@@ -116,6 +118,25 @@
             this.splitContainer1.SplitterDistance = 226;
             this.splitContainer1.TabIndex = 0;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(364, 146);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Time";
+            // 
+            // btnSearchConnection
+            // 
+            this.btnSearchConnection.Location = new System.Drawing.Point(431, 194);
+            this.btnSearchConnection.Name = "btnSearchConnection";
+            this.btnSearchConnection.Size = new System.Drawing.Size(200, 29);
+            this.btnSearchConnection.TabIndex = 4;
+            this.btnSearchConnection.Text = "Search Connection";
+            this.btnSearchConnection.UseVisualStyleBackColor = true;
+            this.btnSearchConnection.Click += new System.EventHandler(this.btnSearchConnection_Click);
+            // 
             // dtpTime
             // 
             this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
@@ -123,14 +144,14 @@
             this.dtpTime.MinDate = new System.DateTime(2016, 1, 1, 0, 0, 0, 0);
             this.dtpTime.Name = "dtpTime";
             this.dtpTime.Size = new System.Drawing.Size(200, 20);
-            this.dtpTime.TabIndex = 7;
+            this.dtpTime.TabIndex = 3;
             // 
             // dtpDate
             // 
             this.dtpDate.Location = new System.Drawing.Point(86, 140);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(200, 20);
-            this.dtpDate.TabIndex = 4;
+            this.dtpDate.TabIndex = 2;
             // 
             // label4
             // 
@@ -170,38 +191,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Connection";
             // 
-            // tabStation
-            // 
-            this.tabStation.Location = new System.Drawing.Point(4, 22);
-            this.tabStation.Name = "tabStation";
-            this.tabStation.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStation.Size = new System.Drawing.Size(685, 533);
-            this.tabStation.TabIndex = 1;
-            this.tabStation.Text = "Search Station";
-            this.tabStation.UseVisualStyleBackColor = true;
-            // 
-            // txtTo
-            // 
-            this.txtTo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTo.Location = new System.Drawing.Point(86, 101);
-            this.txtTo.Name = "txtTo";
-            this.txtTo.Size = new System.Drawing.Size(200, 20);
-            this.txtTo.TabIndex = 9;
-            // 
-            // btnSearchConnection
-            // 
-            this.btnSearchConnection.Location = new System.Drawing.Point(431, 194);
-            this.btnSearchConnection.Name = "btnSearchConnection";
-            this.btnSearchConnection.Size = new System.Drawing.Size(200, 29);
-            this.btnSearchConnection.TabIndex = 10;
-            this.btnSearchConnection.Text = "Search Connection";
-            this.btnSearchConnection.UseVisualStyleBackColor = true;
-            this.btnSearchConnection.Click += new System.EventHandler(this.btnSearchConnection_Click);
-            // 
             // lsvConnections
             // 
             this.lsvConnections.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader6,
             this.columnHeader1,
+            this.columnHeader7,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
@@ -214,50 +209,71 @@
             this.lsvConnections.UseCompatibleStateImageBehavior = false;
             this.lsvConnections.View = System.Windows.Forms.View.Details;
             // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "From";
+            // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Departure time";
             this.columnHeader1.Width = 100;
             // 
+            // columnHeader7
+            // 
+            this.columnHeader7.DisplayIndex = 3;
+            this.columnHeader7.Text = "To";
+            // 
             // columnHeader2
             // 
+            this.columnHeader2.DisplayIndex = 4;
             this.columnHeader2.Text = "Arrival time";
             this.columnHeader2.Width = 100;
             // 
             // columnHeader3
             // 
+            this.columnHeader3.DisplayIndex = 6;
             this.columnHeader3.Text = "Duration";
             this.columnHeader3.Width = 100;
             // 
             // columnHeader4
             // 
+            this.columnHeader4.DisplayIndex = 2;
             this.columnHeader4.Text = "Departure platform";
             this.columnHeader4.Width = 100;
             // 
             // columnHeader5
             // 
+            this.columnHeader5.DisplayIndex = 5;
             this.columnHeader5.Text = "Arrival platform";
             this.columnHeader5.Width = 100;
             // 
-            // label5
+            // tabStation
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(364, 146);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Time";
+            this.tabStation.Location = new System.Drawing.Point(4, 22);
+            this.tabStation.Name = "tabStation";
+            this.tabStation.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStation.Size = new System.Drawing.Size(685, 533);
+            this.tabStation.TabIndex = 1;
+            this.tabStation.Text = "Search Station";
+            this.tabStation.UseVisualStyleBackColor = true;
             // 
-            // txtFrom
+            // cmbFrom
             // 
-            this.txtFrom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtFrom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtFrom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFrom.Location = new System.Drawing.Point(86, 61);
-            this.txtFrom.Name = "txtFrom";
-            this.txtFrom.Size = new System.Drawing.Size(200, 20);
-            this.txtFrom.TabIndex = 12;
-            this.txtFrom.TextChanged += new System.EventHandler(this.txtFrom_TextChanged);
+            this.cmbFrom.FormattingEnabled = true;
+            this.cmbFrom.Location = new System.Drawing.Point(86, 60);
+            this.cmbFrom.Name = "cmbFrom";
+            this.cmbFrom.Size = new System.Drawing.Size(200, 21);
+            this.cmbFrom.TabIndex = 0;
+            this.cmbFrom.TextChanged += new System.EventHandler(this.cmbStationSearch_TextChanged);
+            // 
+            // cmbTo
+            // 
+            this.cmbTo.FormattingEnabled = true;
+            this.cmbTo.Location = new System.Drawing.Point(86, 101);
+            this.cmbTo.Name = "cmbTo";
+            this.cmbTo.Size = new System.Drawing.Size(200, 21);
+            this.cmbTo.TabIndex = 1;
+            this.cmbTo.TextChanged += new System.EventHandler(this.cmbStationSearch_TextChanged);
             // 
             // Form1
             // 
@@ -290,7 +306,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtTo;
         private System.Windows.Forms.Button btnSearchConnection;
         private System.Windows.Forms.ListView lsvConnections;
         private System.Windows.Forms.Label label5;
@@ -299,7 +314,10 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.TextBox txtFrom;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ComboBox cmbTo;
+        private System.Windows.Forms.ComboBox cmbFrom;
     }
 }
 
