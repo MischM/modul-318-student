@@ -56,6 +56,7 @@ namespace PublicTransportApp
         /// <param name="e"></param>
         private void btnSearchConnection_Click(object sender, EventArgs e)
         {
+            UpdateStatusStrip("Work in progress");
             lsvConnections.Items.Clear();
             var placeOfDeparture = cmbFrom.Text ?? "";
             var destination = cmbTo.Text ?? "";
@@ -105,6 +106,8 @@ namespace PublicTransportApp
                 };
                 var item = new ListViewItem(subitems);
                 lsvConnections.Items.Add(item);
+
+                UpdateStatusStrip("Ready");
             }
         }
 
@@ -113,8 +116,16 @@ namespace PublicTransportApp
 
         }
 
+        private void UpdateStatusStrip(string status)
+        {
+            tslStatus.Text = status;
+        }
+
         #endregion
+
+
     }
+
     class AutocompleteEventArgs : EventArgs
     {
         public Stations stations { get; set; }
