@@ -56,15 +56,18 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabStation = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btnSearchStationboard = new System.Windows.Forms.Button();
+            this.cmbStationboard = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslStatusStationboards = new System.Windows.Forms.ToolStripStatusLabel();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lsvStationboard = new System.Windows.Forms.ListView();
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -339,34 +342,36 @@
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.button1);
-            this.splitContainer2.Panel1.Controls.Add(this.comboBox1);
+            this.splitContainer2.Panel1.Controls.Add(this.btnSearchStationboard);
+            this.splitContainer2.Panel1.Controls.Add(this.cmbStationboard);
             this.splitContainer2.Panel1.Controls.Add(this.label7);
             this.splitContainer2.Panel1.Controls.Add(this.label6);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.listView1);
+            this.splitContainer2.Panel2.Controls.Add(this.lsvStationboard);
             this.splitContainer2.Size = new System.Drawing.Size(679, 505);
             this.splitContainer2.SplitterDistance = 252;
             this.splitContainer2.TabIndex = 5;
             // 
-            // button1
+            // btnSearchStationboard
             // 
-            this.button1.Location = new System.Drawing.Point(474, 88);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(200, 29);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSearchStationboard.Location = new System.Drawing.Point(474, 88);
+            this.btnSearchStationboard.Name = "btnSearchStationboard";
+            this.btnSearchStationboard.Size = new System.Drawing.Size(200, 29);
+            this.btnSearchStationboard.TabIndex = 3;
+            this.btnSearchStationboard.Text = "Search";
+            this.btnSearchStationboard.UseVisualStyleBackColor = true;
+            this.btnSearchStationboard.Click += new System.EventHandler(this.btnSearchStationboard_Click);
             // 
-            // comboBox1
+            // cmbStationboard
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(86, 60);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(200, 21);
-            this.comboBox1.TabIndex = 2;
+            this.cmbStationboard.FormattingEnabled = true;
+            this.cmbStationboard.Location = new System.Drawing.Point(86, 60);
+            this.cmbStationboard.Name = "cmbStationboard";
+            this.cmbStationboard.Size = new System.Drawing.Size(200, 21);
+            this.cmbStationboard.TabIndex = 2;
+            this.cmbStationboard.TextChanged += new System.EventHandler(this.cmbStationSearch_TextChanged);
             // 
             // label7
             // 
@@ -418,15 +423,34 @@
             this.tslStatusStationboards.Size = new System.Drawing.Size(39, 17);
             this.tslStatusStationboards.Text = "Ready";
             // 
-            // listView1
+            // lsvStationboard
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(679, 249);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lsvStationboard.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader8,
+            this.columnHeader9,
+            this.columnHeader15});
+            this.lsvStationboard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lsvStationboard.Location = new System.Drawing.Point(0, 0);
+            this.lsvStationboard.Name = "lsvStationboard";
+            this.lsvStationboard.Size = new System.Drawing.Size(679, 249);
+            this.lsvStationboard.TabIndex = 1;
+            this.lsvStationboard.UseCompatibleStateImageBehavior = false;
+            this.lsvStationboard.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "From";
+            this.columnHeader8.Width = 100;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Departure time";
+            this.columnHeader9.Width = 100;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "To";
+            this.columnHeader15.Width = 200;
             // 
             // Form1
             // 
@@ -487,8 +511,8 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel tslStatus;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button btnSearchStationboard;
+        private System.Windows.Forms.ComboBox cmbStationboard;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
@@ -496,7 +520,10 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel tslStatusStationboards;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lsvStationboard;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
     }
 }
 

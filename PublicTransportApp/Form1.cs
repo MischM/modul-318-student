@@ -42,11 +42,17 @@ namespace PublicTransportApp
         private delegate void AutoCompleteEventHandler(object sender, AutocompleteEventArgs e);
         private event AutoCompleteEventHandler AutoCompleteLoaded;
 
+        /// <summary>
+        /// Load Stations and pass the result to the <see cref="AutoCompleteLoaded"/> Event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AutocompleteTimer_Tick(object sender, EventArgs e)
         {
+            Console.WriteLine("Autocomplete Started");
             AutocompleteTimer.Stop();
-            //todo method call loadStations
-            AutoCompleteLoaded(this, new AutocompleteEventArgs { stations = null });
+            AutoCompleteLoaded(this, new AutocompleteEventArgs { Stations = Transport.GetStations(LastStationText) });
+            Console.WriteLine("Autocomplete Finished");
         }
 
         /// <summary>
@@ -69,16 +75,41 @@ namespace PublicTransportApp
             FillListView(connections);
         }
 
+        /// <summary>
+        /// Wait some time before loading the Stations, because otherwise it will load too many times and show old search results.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbStationSearch_TextChanged(object sender, EventArgs e)
         {
+            LastStationBox = (ComboBox)sender;
+            LastStationText = LastStationBox.Text;
             AutocompleteTimer.Stop();
             AutocompleteTimer.Start();
         }
 
+        /// <summary>
+        /// Add the stations to the ComboBox and display the dropdown
+        /// This has to be done in this Event and not from the Timer, because the Timer Thread has no access to the LastStationBox (is not the owner of it)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void this_AutoComplete(object sender, AutocompleteEventArgs e)
         {
-            Console.WriteLine("Completed till here");
-            //cmb abfüllen
+            if (!LastStationBox.Focused)
+            {
+                return;
+            }
+
+            var textPosition = LastStationBox.SelectionStart;
+
+            LastStationBox.Items.Clear();
+            LastStationBox.Items.Add(LastStationText);
+            LastStationBox.Items.Add("*****");
+            LastStationBox.Items.AddRange(e.Stations.StationList.ToArray());
+            LastStationBox.DroppedDown = true;
+
+            LastStationBox.Select(textPosition, 0);
         }
 
         #endregion
@@ -86,7 +117,7 @@ namespace PublicTransportApp
         #region Methods
 
         /// <summary>
-        /// displaying the Connections returned by the API to the ListView
+        /// Displaying the Connections returned by the API to the ListView
         /// </summary>
         /// <param name="connections">Connections object</param>
         private void FillListView(Connections connections)
@@ -111,23 +142,41 @@ namespace PublicTransportApp
             }
         }
 
-        private void GetAutocomplete()
-        {
-
-        }
-
         private void UpdateStatusStrip(string status)
         {
             tslStatus.Text = status;
         }
 
-        #endregion
+        private void btnSearchStationboard_Click(object sender, EventArgs e)
+        {
+            UpdateStatusStrip("Work in progress");
+            var stations = Transport.GetStations(cmbStationboard.Text);
+            var station = stations.StationList.Find(x => x.Name == cmbStationboard.Text);
+            var stationboard = Transport.GetStationBoard(station.Name, station.Id);
 
+            foreach (var entry in stationboard.Entries)
+            {
+                var subitems = new[]
+                {
+                    stationboard.Station.Name,
+                    entry.Stop.Departure.ToShortTimeString(),
+                    entry.To
+                };
+                var item = new ListViewItem(subitems);
+                lsvStationboard.Items.Add(item);
+            }
+            UpdateStatusStrip("Ready");
+        }
+
+        #endregion
 
     }
 
+    /// <summary>
+    /// The Event Args passed to the <see cref="Form1.AutoCompleteLoaded"/> Event.
+    /// </summary>
     class AutocompleteEventArgs : EventArgs
     {
-        public Stations stations { get; set; }
+        public Stations Stations { get; set; }
     }
 }

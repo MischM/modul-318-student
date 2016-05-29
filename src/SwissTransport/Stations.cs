@@ -31,6 +31,15 @@ namespace SwissTransport
 
         [JsonProperty("distance")]
         public double? Distance { get; set; }
+
+        /// <summary>
+        /// Return name for usage in ComboBox.Items
+        /// </summary>
+        /// <returns>Name of the station</returns>
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     public class Stations
