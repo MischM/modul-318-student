@@ -62,15 +62,15 @@ namespace PublicTransportApp
         /// <param name="e"></param>
         private void btnSearchConnection_Click(object sender, EventArgs e)
         {
-            UpdateStatusStrip("Work in progress");
+            UpdateStatusStrip("Loading");
             lsvConnections.Items.Clear();
             var placeOfDeparture = cmbFrom.Text ?? "";
             var destination = cmbTo.Text ?? "";
             var date = dtpDate.Value; //DateTime.ParseExact(dtpDate.Value.ToString(), @"dd\.MM\.yyyy\ hh\:mm\:ss", null).ToString(@"yyyy\-MM\-\dd\T");
             var time = dtpTime.Value;
             //todo error handling
-            //"2016-05-25T15:55:00+0200"
-            Connections connections = Transport.GetConnections(placeOfDeparture, destination);
+            
+            Connections connections = Transport.GetConnectionsByDateTime(placeOfDeparture, destination, date, time);//Transport.GetConnections(placeOfDeparture, destination);
 
             FillListView(connections);
         }
@@ -142,14 +142,14 @@ namespace PublicTransportApp
             }
         }
 
-        private void UpdateStatusStrip(string status)
-        {
-            tslStatus.Text = status;
-        }
-
+        /// <summary>
+        /// Load the statioboard
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearchStationboard_Click(object sender, EventArgs e)
         {
-            UpdateStatusStrip("Work in progress");
+            UpdateStatusStrip("Loading");
             var stations = Transport.GetStations(cmbStationboard.Text);
             var station = stations.StationList.Find(x => x.Name == cmbStationboard.Text);
             var stationboard = Transport.GetStationBoard(station.Name, station.Id);
@@ -166,6 +166,12 @@ namespace PublicTransportApp
                 lsvStationboard.Items.Add(item);
             }
             UpdateStatusStrip("Ready");
+        }
+
+        private void UpdateStatusStrip(string status)
+        {
+            tslStatus.Text = status;
+            tslStatusStationboards.Text = status;
         }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using Newtonsoft.Json;
 
@@ -62,9 +63,11 @@ namespace SwissTransport
         /// <param name="toStattion"></param>
         /// <param name="time"></param>
         /// <returns></returns>
-        public Connections GetConnectionsByTime(string fromStation, string toStattion, string time)
+        public Connections GetConnectionsByDateTime(string fromStation, string toStattion, DateTime date, DateTime time)
         {
-            var request = CreateWebRequest("http://transport.opendata.ch/v1/connections?from=" + fromStation + "&to=" + toStattion + "&departion" + time);
+            //expected time format 15:55
+            //expected date format 2016-05-25
+            var request = CreateWebRequest("http://transport.opendata.ch/v1/connections?from=" + fromStation + "&to=" + toStattion + "&date=" + date.ToString("yyyy-MM-dd") + "&time=" + time.ToString("HH:mm"));
             var response = request.GetResponse();
             var responseStream = response.GetResponseStream();
 

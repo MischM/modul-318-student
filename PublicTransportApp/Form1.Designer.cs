@@ -60,14 +60,14 @@
             this.cmbStationboard = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tslStatusStationboards = new System.Windows.Forms.ToolStripStatusLabel();
             this.lsvStationboard = new System.Windows.Forms.ListView();
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tslStatusStationboards = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -249,7 +249,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(583, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(584, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -261,7 +261,7 @@
             // tslStatus
             // 
             this.tslStatus.Name = "tslStatus";
-            this.tslStatus.Size = new System.Drawing.Size(39, 17);
+            this.tslStatus.Size = new System.Drawing.Size(38, 17);
             this.tslStatus.Text = "Ready";
             // 
             // lsvConnections
@@ -269,10 +269,10 @@
             this.lsvConnections.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6,
             this.columnHeader1,
+            this.columnHeader4,
             this.columnHeader7,
             this.columnHeader2,
             this.columnHeader3,
-            this.columnHeader4,
             this.columnHeader5});
             this.lsvConnections.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsvConnections.Location = new System.Drawing.Point(0, 0);
@@ -285,6 +285,7 @@
             // columnHeader6
             // 
             this.columnHeader6.Text = "From";
+            this.columnHeader6.Width = 80;
             // 
             // columnHeader1
             // 
@@ -293,12 +294,11 @@
             // 
             // columnHeader7
             // 
-            this.columnHeader7.DisplayIndex = 3;
             this.columnHeader7.Text = "To";
+            this.columnHeader7.Width = 80;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.DisplayIndex = 4;
             this.columnHeader2.Text = "Arrival time";
             this.columnHeader2.Width = 100;
             // 
@@ -310,7 +310,6 @@
             // 
             // columnHeader4
             // 
-            this.columnHeader4.DisplayIndex = 2;
             this.columnHeader4.Text = "Departure platform";
             this.columnHeader4.Width = 100;
             // 
@@ -393,36 +392,6 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Station";
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel3,
-            this.toolStripStatusLabel4,
-            this.tslStatusStationboards});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 508);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(679, 22);
-            this.statusStrip1.TabIndex = 4;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(583, 17);
-            this.toolStripStatusLabel3.Spring = true;
-            // 
-            // toolStripStatusLabel4
-            // 
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(42, 17);
-            this.toolStripStatusLabel4.Text = "Status:";
-            // 
-            // tslStatusStationboards
-            // 
-            this.tslStatusStationboards.Name = "tslStatusStationboards";
-            this.tslStatusStationboards.Size = new System.Drawing.Size(39, 17);
-            this.tslStatusStationboards.Text = "Ready";
-            // 
             // lsvStationboard
             // 
             this.lsvStationboard.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -451,6 +420,36 @@
             // 
             this.columnHeader15.Text = "To";
             this.columnHeader15.Width = 200;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabel4,
+            this.tslStatusStationboards});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 508);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(679, 22);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(584, 17);
+            this.toolStripStatusLabel3.Spring = true;
+            // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(42, 17);
+            this.toolStripStatusLabel4.Text = "Status:";
+            // 
+            // tslStatusStationboards
+            // 
+            this.tslStatusStationboards.Name = "tslStatusStationboards";
+            this.tslStatusStationboards.Size = new System.Drawing.Size(38, 17);
+            this.tslStatusStationboards.Text = "Ready";
             // 
             // Form1
             // 
