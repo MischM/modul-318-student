@@ -56,18 +56,20 @@ namespace SwissTransport
 
             return null;
         }
+
         /// <summary>
-        /// 
+        /// Get the connection with time filter
         /// </summary>
-        /// <param name="fromStation"></param>
-        /// <param name="toStattion"></param>
-        /// <param name="time"></param>
+        /// <param name="fromStation">Departure</param>
+        /// <param name="toStattion">Destination</param>
+        /// <param name="date">Date of connection</param>
+        /// <param name="time">Time of connection</param>
         /// <returns></returns>
-        public Connections GetConnectionsByDateTime(string fromStation, string toStattion, DateTime date, DateTime time)
+        public Connections GetConnectionsByDateTime(string fromStation, string toStattion, DateTime date, DateTime time, bool isArrival)
         {
             //expected time format 15:55
             //expected date format 2016-05-25
-            var request = CreateWebRequest("http://transport.opendata.ch/v1/connections?from=" + fromStation + "&to=" + toStattion + "&date=" + date.ToString("yyyy-MM-dd") + "&time=" + time.ToString("HH:mm"));
+            var request = CreateWebRequest("http://transport.opendata.ch/v1/connections?from=" + fromStation + "&to=" + toStattion + "&date=" + date.ToString("yyyy-MM-dd") + "&time=" + time.ToString("HH:mm") + "&isArrivalTime=" + isArrival);
             var response = request.GetResponse();
             var responseStream = response.GetResponseStream();
 

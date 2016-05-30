@@ -64,13 +64,15 @@ namespace PublicTransportApp
         {
             UpdateStatusStrip("Loading");
             lsvConnections.Items.Clear();
+
             var placeOfDeparture = cmbFrom.Text ?? "";
             var destination = cmbTo.Text ?? "";
-            var date = dtpDate.Value; //DateTime.ParseExact(dtpDate.Value.ToString(), @"dd\.MM\.yyyy\ hh\:mm\:ss", null).ToString(@"yyyy\-MM\-\dd\T");
+            var date = dtpDate.Value;
             var time = dtpTime.Value;
+            var isArrival = rdbArrival.Checked;
             //todo error handling
-            
-            Connections connections = Transport.GetConnectionsByDateTime(placeOfDeparture, destination, date, time);//Transport.GetConnections(placeOfDeparture, destination);
+
+            Connections connections = Transport.GetConnectionsByDateTime(placeOfDeparture, destination, date, time, isArrival);
 
             FillListView(connections);
         }
@@ -112,6 +114,32 @@ namespace PublicTransportApp
             LastStationBox.Select(textPosition, 0);
         }
 
+        /// <summary>
+        /// Open Google Maps in the default browser
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenGoogleMaps(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var linkLabel = (LinkLabel)sender;
+            var stationName = "";
+
+            if (linkLabel.Name == this.llbFrom.Name)
+            {
+                stationName = cmbFrom.Text;
+            }
+            else
+            {
+                stationName = cmbTo.Text;
+            }
+
+            this.llbFrom.LinkVisited = true;
+            var stations = Transport.GetStations(stationName);
+            var station = stations.StationList.Find(x => x.Name == stationName);
+
+            System.Diagnostics.Process.Start("https://www.google.ch/maps/place/" + station.Coordinate.XCoordinate + "," + station.Coordinate.YCoordinate + "/data=!3m1!1e3");
+        }
+
         #endregion
 
         #region Methods
@@ -137,9 +165,8 @@ namespace PublicTransportApp
                 };
                 var item = new ListViewItem(subitems);
                 lsvConnections.Items.Add(item);
-
-                UpdateStatusStrip("Ready");
             }
+            UpdateStatusStrip("Ready");
         }
 
         /// <summary>

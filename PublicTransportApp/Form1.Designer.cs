@@ -32,6 +32,10 @@
             this.tabStart = new System.Windows.Forms.TabPage();
             this.tabConnection = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.llbTo = new System.Windows.Forms.LinkLabel();
+            this.llbFrom = new System.Windows.Forms.LinkLabel();
+            this.rdbArrival = new System.Windows.Forms.RadioButton();
+            this.rdbDeparture = new System.Windows.Forms.RadioButton();
             this.cmbTo = new System.Windows.Forms.ComboBox();
             this.cmbFrom = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -49,10 +53,10 @@
             this.lsvConnections = new System.Windows.Forms.ListView();
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabStation = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -68,6 +72,7 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslStatusStationboards = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnSendMail = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -92,7 +97,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(693, 559);
+            this.tabControl1.Size = new System.Drawing.Size(707, 628);
             this.tabControl1.TabIndex = 1;
             // 
             // tabStart
@@ -110,7 +115,7 @@
             this.tabConnection.Location = new System.Drawing.Point(4, 22);
             this.tabConnection.Name = "tabConnection";
             this.tabConnection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConnection.Size = new System.Drawing.Size(685, 533);
+            this.tabConnection.Size = new System.Drawing.Size(699, 602);
             this.tabConnection.TabIndex = 0;
             this.tabConnection.Text = "Search Connection";
             this.tabConnection.UseVisualStyleBackColor = true;
@@ -124,6 +129,11 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnSendMail);
+            this.splitContainer1.Panel1.Controls.Add(this.llbTo);
+            this.splitContainer1.Panel1.Controls.Add(this.llbFrom);
+            this.splitContainer1.Panel1.Controls.Add(this.rdbArrival);
+            this.splitContainer1.Panel1.Controls.Add(this.rdbDeparture);
             this.splitContainer1.Panel1.Controls.Add(this.cmbTo);
             this.splitContainer1.Panel1.Controls.Add(this.cmbFrom);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
@@ -139,9 +149,53 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.statusStrip2);
             this.splitContainer1.Panel2.Controls.Add(this.lsvConnections);
-            this.splitContainer1.Size = new System.Drawing.Size(679, 527);
-            this.splitContainer1.SplitterDistance = 226;
+            this.splitContainer1.Size = new System.Drawing.Size(693, 596);
+            this.splitContainer1.SplitterDistance = 255;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // llbTo
+            // 
+            this.llbTo.AutoSize = true;
+            this.llbTo.Location = new System.Drawing.Point(310, 104);
+            this.llbTo.Name = "llbTo";
+            this.llbTo.Size = new System.Drawing.Size(115, 13);
+            this.llbTo.TabIndex = 15;
+            this.llbTo.TabStop = true;
+            this.llbTo.Text = "Show on Google Maps";
+            this.llbTo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.OpenGoogleMaps);
+            // 
+            // llbFrom
+            // 
+            this.llbFrom.AutoSize = true;
+            this.llbFrom.Location = new System.Drawing.Point(310, 63);
+            this.llbFrom.Name = "llbFrom";
+            this.llbFrom.Size = new System.Drawing.Size(115, 13);
+            this.llbFrom.TabIndex = 14;
+            this.llbFrom.TabStop = true;
+            this.llbFrom.Text = "Show on Google Maps";
+            this.llbFrom.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.OpenGoogleMaps);
+            // 
+            // rdbArrival
+            // 
+            this.rdbArrival.AutoSize = true;
+            this.rdbArrival.Location = new System.Drawing.Point(419, 144);
+            this.rdbArrival.Name = "rdbArrival";
+            this.rdbArrival.Size = new System.Drawing.Size(54, 17);
+            this.rdbArrival.TabIndex = 13;
+            this.rdbArrival.Text = "Arrival";
+            this.rdbArrival.UseVisualStyleBackColor = true;
+            // 
+            // rdbDeparture
+            // 
+            this.rdbDeparture.AutoSize = true;
+            this.rdbDeparture.Checked = true;
+            this.rdbDeparture.Location = new System.Drawing.Point(327, 144);
+            this.rdbDeparture.Name = "rdbDeparture";
+            this.rdbDeparture.Size = new System.Drawing.Size(86, 17);
+            this.rdbDeparture.TabIndex = 12;
+            this.rdbDeparture.TabStop = true;
+            this.rdbDeparture.Text = "Departure Or";
+            this.rdbDeparture.UseVisualStyleBackColor = true;
             // 
             // cmbTo
             // 
@@ -164,7 +218,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(364, 146);
+            this.label5.Location = new System.Drawing.Point(479, 146);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 13);
             this.label5.TabIndex = 11;
@@ -183,10 +237,10 @@
             // dtpTime
             // 
             this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTime.Location = new System.Drawing.Point(431, 140);
+            this.dtpTime.Location = new System.Drawing.Point(515, 139);
             this.dtpTime.MinDate = new System.DateTime(2016, 1, 1, 0, 0, 0, 0);
             this.dtpTime.Name = "dtpTime";
-            this.dtpTime.Size = new System.Drawing.Size(200, 20);
+            this.dtpTime.Size = new System.Drawing.Size(116, 20);
             this.dtpTime.TabIndex = 3;
             // 
             // dtpDate
@@ -240,16 +294,16 @@
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.tslStatus});
-            this.statusStrip2.Location = new System.Drawing.Point(0, 275);
+            this.statusStrip2.Location = new System.Drawing.Point(0, 315);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(679, 22);
+            this.statusStrip2.Size = new System.Drawing.Size(693, 22);
             this.statusStrip2.TabIndex = 1;
             this.statusStrip2.Text = "statusStrip2";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(584, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(598, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -277,7 +331,7 @@
             this.lsvConnections.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsvConnections.Location = new System.Drawing.Point(0, 0);
             this.lsvConnections.Name = "lsvConnections";
-            this.lsvConnections.Size = new System.Drawing.Size(679, 297);
+            this.lsvConnections.Size = new System.Drawing.Size(693, 337);
             this.lsvConnections.TabIndex = 0;
             this.lsvConnections.UseCompatibleStateImageBehavior = false;
             this.lsvConnections.View = System.Windows.Forms.View.Details;
@@ -291,6 +345,11 @@
             // 
             this.columnHeader1.Text = "Departure time";
             this.columnHeader1.Width = 100;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Departure platform";
+            this.columnHeader4.Width = 100;
             // 
             // columnHeader7
             // 
@@ -307,11 +366,6 @@
             this.columnHeader3.DisplayIndex = 6;
             this.columnHeader3.Text = "Duration";
             this.columnHeader3.Width = 100;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Departure platform";
-            this.columnHeader4.Width = 100;
             // 
             // columnHeader5
             // 
@@ -451,11 +505,20 @@
             this.tslStatusStationboards.Size = new System.Drawing.Size(38, 17);
             this.tslStatusStationboards.Text = "Ready";
             // 
+            // btnSendMail
+            // 
+            this.btnSendMail.Location = new System.Drawing.Point(5, 231);
+            this.btnSendMail.Name = "btnSendMail";
+            this.btnSendMail.Size = new System.Drawing.Size(116, 21);
+            this.btnSendMail.TabIndex = 16;
+            this.btnSendMail.Text = "Send per Mail";
+            this.btnSendMail.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 559);
+            this.ClientSize = new System.Drawing.Size(707, 628);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Public Transport App";
@@ -523,6 +586,11 @@
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.RadioButton rdbArrival;
+        private System.Windows.Forms.RadioButton rdbDeparture;
+        private System.Windows.Forms.LinkLabel llbTo;
+        private System.Windows.Forms.LinkLabel llbFrom;
+        private System.Windows.Forms.Button btnSendMail;
     }
 }
 
