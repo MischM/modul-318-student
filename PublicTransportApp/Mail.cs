@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SwissTransport;
+using System.Net;
 
 namespace PublicTransportApp
 {
@@ -16,7 +17,7 @@ namespace PublicTransportApp
     {
         private Connections connections { get; set; }
 
-        public Mail(Form1 currentForm)
+        public Mail(PublicTransport currentForm)
         {
             InitializeComponent();
             connections = currentForm.CurrentConnections;
@@ -30,38 +31,43 @@ namespace PublicTransportApp
             {
                 try
                 {
-                    MailMessage mail = new MailMessage(txtMailAddress.Text, txtRecipient.Text);
+                    var fromAddress = new MailAddress(txtMailAddress.Text, "PublicTransport Transport App");
+                    var toAddress = new MailAddress(txtRecipient.Text);
+                    MailMessage mail = new MailMessage(fromAddress, toAddress);
                     var host = (ComboBoxItem)cmbHost.SelectedItem;
-                    SmtpClient client = new SmtpClient("smtp." + host.Value + ".com");
 
-                    client.UseDefaultCredentials = false;
-                    client.Port = 587;
-                    client.Credentials = new System.Net.NetworkCredential(txtMailAddress.Text, txtPassword.Text);
-                    client.EnableSsl = true;
-                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    var client = new SmtpClient
+                    {
+                        Host = "smtp." + host.Value + ".com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(fromAddress.Address, txtPassword.Text)
+                    };
 
                     mail.Subject = txtSubject.Text;
                     mail.Body = txtMessage.Text + Environment.NewLine;
                     foreach (var connection in connections.ConnectionList)
                     {
-                         mail.Body += string.Format(
-                            "From: {0} Departure time: {1} Platform: {2} To: {3} Arrival time: {4} Arrival platform: {5} Duration{6}" + Environment.NewLine,
-                            connection.From.Station.Name,
-                            DateTime.Parse(connection.From.Departure).ToShortTimeString(),
-                            connection.From.Platform,
-                            connection.To.Station.Name,
-                            DateTime.Parse(connection.To.Arrival).ToShortTimeString(),
-                            connection.To.Platform,
-                            TimeSpan.ParseExact(connection.Duration, @"dd\dhh\:mm\:ss", null).ToString(@"hh\:mm")
-                            );
+                        mail.Body += string.Format(
+                           "From: {0} Departure time: {1} Platform: {2} To: {3} Arrival time: {4} Arrival platform: {5} Duration{6}" + Environment.NewLine,
+                           connection.From.Station.Name,
+                           DateTime.Parse(connection.From.Departure).ToShortTimeString(),
+                           connection.From.Platform,
+                           connection.To.Station.Name,
+                           DateTime.Parse(connection.To.Arrival).ToShortTimeString(),
+                           connection.To.Platform,
+                           TimeSpan.ParseExact(connection.Duration, @"dd\dhh\:mm\:ss", null).ToString(@"hh\:mm")
+                           );
                     }
 
                     client.Send(mail);
                     MessageBox.Show("Mail sent");
                 }
-                catch (FormatException)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("A format error occured. Please check your eMail address!");
+                    MessageBox.Show(ex.Message);
                 }
             }
         }

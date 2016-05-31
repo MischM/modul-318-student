@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Mail));
             this.btnSend = new System.Windows.Forms.Button();
             this.txtMailAddress = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
@@ -50,7 +51,7 @@
             this.btnSend.Location = new System.Drawing.Point(278, 377);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
-            this.btnSend.TabIndex = 0;
+            this.btnSend.TabIndex = 6;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
@@ -86,7 +87,7 @@
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.Size = new System.Drawing.Size(322, 131);
-            this.txtMessage.TabIndex = 4;
+            this.txtMessage.TabIndex = 5;
             // 
             // label2
             // 
@@ -120,14 +121,14 @@
             this.txtSubject.Location = new System.Drawing.Point(153, 178);
             this.txtSubject.Name = "txtSubject";
             this.txtSubject.Size = new System.Drawing.Size(200, 20);
-            this.txtSubject.TabIndex = 7;
+            this.txtSubject.TabIndex = 4;
             // 
             // txtRecipient
             // 
             this.txtRecipient.Location = new System.Drawing.Point(153, 134);
             this.txtRecipient.Name = "txtRecipient";
             this.txtRecipient.Size = new System.Drawing.Size(200, 20);
-            this.txtRecipient.TabIndex = 6;
+            this.txtRecipient.TabIndex = 3;
             // 
             // label5
             // 
@@ -143,7 +144,7 @@
             this.btnCancel.Location = new System.Drawing.Point(197, 377);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 11;
+            this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -164,7 +165,7 @@
             this.cmbHost.Location = new System.Drawing.Point(153, 26);
             this.cmbHost.Name = "cmbHost";
             this.cmbHost.Size = new System.Drawing.Size(200, 21);
-            this.cmbHost.TabIndex = 14;
+            this.cmbHost.TabIndex = 0;
             // 
             // label7
             // 
@@ -195,8 +196,9 @@
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtMailAddress);
             this.Controls.Add(this.btnSend);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Mail";
-            this.Text = "Browser";
+            this.Text = "Mail";
             this.ResumeLayout(false);
             this.PerformLayout();
 
