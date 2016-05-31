@@ -32,6 +32,7 @@
             this.tabStart = new System.Windows.Forms.TabPage();
             this.tabConnection = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnSendMail = new System.Windows.Forms.Button();
             this.llbTo = new System.Windows.Forms.LinkLabel();
             this.llbFrom = new System.Windows.Forms.LinkLabel();
             this.rdbArrival = new System.Windows.Forms.RadioButton();
@@ -72,7 +73,6 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslStatusStationboards = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnSendMail = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -104,7 +104,7 @@
             // 
             this.tabStart.Location = new System.Drawing.Point(4, 22);
             this.tabStart.Name = "tabStart";
-            this.tabStart.Size = new System.Drawing.Size(685, 533);
+            this.tabStart.Size = new System.Drawing.Size(699, 602);
             this.tabStart.TabIndex = 2;
             this.tabStart.Text = "Start";
             this.tabStart.UseVisualStyleBackColor = true;
@@ -150,8 +150,18 @@
             this.splitContainer1.Panel2.Controls.Add(this.statusStrip2);
             this.splitContainer1.Panel2.Controls.Add(this.lsvConnections);
             this.splitContainer1.Size = new System.Drawing.Size(693, 596);
-            this.splitContainer1.SplitterDistance = 255;
+            this.splitContainer1.SplitterDistance = 254;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // btnSendMail
+            // 
+            this.btnSendMail.Location = new System.Drawing.Point(5, 231);
+            this.btnSendMail.Name = "btnSendMail";
+            this.btnSendMail.Size = new System.Drawing.Size(116, 21);
+            this.btnSendMail.TabIndex = 16;
+            this.btnSendMail.Text = "Send per Mail";
+            this.btnSendMail.UseVisualStyleBackColor = true;
+            this.btnSendMail.Click += new System.EventHandler(this.btnSendMail_Click);
             // 
             // llbTo
             // 
@@ -294,7 +304,7 @@
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.tslStatus});
-            this.statusStrip2.Location = new System.Drawing.Point(0, 315);
+            this.statusStrip2.Location = new System.Drawing.Point(0, 316);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.Size = new System.Drawing.Size(693, 22);
             this.statusStrip2.TabIndex = 1;
@@ -331,7 +341,7 @@
             this.lsvConnections.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsvConnections.Location = new System.Drawing.Point(0, 0);
             this.lsvConnections.Name = "lsvConnections";
-            this.lsvConnections.Size = new System.Drawing.Size(693, 337);
+            this.lsvConnections.Size = new System.Drawing.Size(693, 338);
             this.lsvConnections.TabIndex = 0;
             this.lsvConnections.UseCompatibleStateImageBehavior = false;
             this.lsvConnections.View = System.Windows.Forms.View.Details;
@@ -380,7 +390,7 @@
             this.tabStation.Location = new System.Drawing.Point(4, 22);
             this.tabStation.Name = "tabStation";
             this.tabStation.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStation.Size = new System.Drawing.Size(685, 533);
+            this.tabStation.Size = new System.Drawing.Size(699, 602);
             this.tabStation.TabIndex = 1;
             this.tabStation.Text = "Search Station";
             this.tabStation.UseVisualStyleBackColor = true;
@@ -403,8 +413,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.lsvStationboard);
-            this.splitContainer2.Size = new System.Drawing.Size(679, 505);
-            this.splitContainer2.SplitterDistance = 252;
+            this.splitContainer2.Size = new System.Drawing.Size(693, 574);
+            this.splitContainer2.SplitterDistance = 286;
             this.splitContainer2.TabIndex = 5;
             // 
             // btnSearchStationboard
@@ -455,7 +465,7 @@
             this.lsvStationboard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsvStationboard.Location = new System.Drawing.Point(0, 0);
             this.lsvStationboard.Name = "lsvStationboard";
-            this.lsvStationboard.Size = new System.Drawing.Size(679, 249);
+            this.lsvStationboard.Size = new System.Drawing.Size(693, 284);
             this.lsvStationboard.TabIndex = 1;
             this.lsvStationboard.UseCompatibleStateImageBehavior = false;
             this.lsvStationboard.View = System.Windows.Forms.View.Details;
@@ -481,16 +491,16 @@
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel4,
             this.tslStatusStationboards});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 508);
+            this.statusStrip1.Location = new System.Drawing.Point(3, 577);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(679, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(693, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(584, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(598, 17);
             this.toolStripStatusLabel3.Spring = true;
             // 
             // toolStripStatusLabel4
@@ -504,15 +514,6 @@
             this.tslStatusStationboards.Name = "tslStatusStationboards";
             this.tslStatusStationboards.Size = new System.Drawing.Size(38, 17);
             this.tslStatusStationboards.Text = "Ready";
-            // 
-            // btnSendMail
-            // 
-            this.btnSendMail.Location = new System.Drawing.Point(5, 231);
-            this.btnSendMail.Name = "btnSendMail";
-            this.btnSendMail.Size = new System.Drawing.Size(116, 21);
-            this.btnSendMail.TabIndex = 16;
-            this.btnSendMail.Text = "Send per Mail";
-            this.btnSendMail.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

@@ -18,6 +18,7 @@ namespace PublicTransportApp
         private Timer AutocompleteTimer { get; }
         private string LastStationText { get; set; }
         private ComboBox LastStationBox { get; set; }
+        public Connections CurrentConnections { get; set; }
 
         public Form1()
         {
@@ -72,9 +73,9 @@ namespace PublicTransportApp
             var isArrival = rdbArrival.Checked;
             //todo error handling
 
-            Connections connections = Transport.GetConnectionsByDateTime(placeOfDeparture, destination, date, time, isArrival);
+            CurrentConnections = Transport.GetConnectionsByDateTime(placeOfDeparture, destination, date, time, isArrival);
 
-            FillListView(connections);
+            FillListView();
         }
 
         /// <summary>
@@ -148,9 +149,9 @@ namespace PublicTransportApp
         /// Displaying the Connections returned by the API to the ListView
         /// </summary>
         /// <param name="connections">Connections object</param>
-        private void FillListView(Connections connections)
+        private void FillListView()
         {
-            foreach (var connection in connections.ConnectionList)
+            foreach (var connection in CurrentConnections.ConnectionList)
             {
                 var subitems = new[] {
                     connection.From.Station.Name,
@@ -203,6 +204,11 @@ namespace PublicTransportApp
 
         #endregion
 
+        private void btnSendMail_Click(object sender, EventArgs e)
+        {
+            var mail= new Mail(this);
+            mail.ShowDialog();
+        }
     }
 
     /// <summary>
