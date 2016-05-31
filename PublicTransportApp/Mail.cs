@@ -10,17 +10,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SwissTransport;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace PublicTransportApp
 {
     public partial class Mail : Form
     {
-        private Connections connections { get; set; }
+        private Connections Connections { get; set; }
+        private const string MailRegex = @"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b";
 
         public Mail(PublicTransport currentForm)
         {
             InitializeComponent();
-            connections = currentForm.CurrentConnections;
+            Connections = currentForm.CurrentConnections;
             FillComboBox();
         }
 
@@ -29,46 +31,48 @@ namespace PublicTransportApp
         {
             if (ValidateMailForm())
             {
+
+                var fromAddress = new MailAddress(txtMailAddress.Text, "PublicTransport Transport App");
+                var toAddress = new MailAddress(txtRecipient.Text);
+                MailMessage mail = new MailMessage(fromAddress, toAddress);
+                var host = (ComboBoxItem)cmbHost.SelectedItem;
+
+                var client = new SmtpClient
+                {
+                    Host = "smtp." + host.Value + ".com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromAddress.Address, txtPassword.Text)
+                };
+
+                mail.Subject = txtSubject.Text;
+                mail.Body = txtMessage.Text + Environment.NewLine;
+                foreach (var connection in Connections.ConnectionList)
+                {
+                    mail.Body += string.Format(
+                       "From: {0} Departure time: {1} Platform: {2} To: {3} Arrival time: {4} Arrival platform: {5} Duration{6}" + Environment.NewLine,
+                       connection.From.Station.Name,
+                       DateTime.Parse(connection.From.Departure).ToShortTimeString(),
+                       connection.From.Platform,
+                       connection.To.Station.Name,
+                       DateTime.Parse(connection.To.Arrival).ToShortTimeString(),
+                       connection.To.Platform,
+                       TimeSpan.ParseExact(connection.Duration, @"dd\dhh\:mm\:ss", null).ToString(@"hh\:mm")
+                       );
+                }
+
                 try
                 {
-                    var fromAddress = new MailAddress(txtMailAddress.Text, "PublicTransport Transport App");
-                    var toAddress = new MailAddress(txtRecipient.Text);
-                    MailMessage mail = new MailMessage(fromAddress, toAddress);
-                    var host = (ComboBoxItem)cmbHost.SelectedItem;
-
-                    var client = new SmtpClient
-                    {
-                        Host = "smtp." + host.Value + ".com",
-                        Port = 587,
-                        EnableSsl = true,
-                        DeliveryMethod = SmtpDeliveryMethod.Network,
-                        UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential(fromAddress.Address, txtPassword.Text)
-                    };
-
-                    mail.Subject = txtSubject.Text;
-                    mail.Body = txtMessage.Text + Environment.NewLine;
-                    foreach (var connection in connections.ConnectionList)
-                    {
-                        mail.Body += string.Format(
-                           "From: {0} Departure time: {1} Platform: {2} To: {3} Arrival time: {4} Arrival platform: {5} Duration{6}" + Environment.NewLine,
-                           connection.From.Station.Name,
-                           DateTime.Parse(connection.From.Departure).ToShortTimeString(),
-                           connection.From.Platform,
-                           connection.To.Station.Name,
-                           DateTime.Parse(connection.To.Arrival).ToShortTimeString(),
-                           connection.To.Platform,
-                           TimeSpan.ParseExact(connection.Duration, @"dd\dhh\:mm\:ss", null).ToString(@"hh\:mm")
-                           );
-                    }
-
                     client.Send(mail);
-                    MessageBox.Show("Mail sent");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    return;
                 }
+                MessageBox.Show("Mail sent");
             }
         }
 
@@ -86,15 +90,21 @@ namespace PublicTransportApp
                 MessageBox.Show("Please fill out all required fields.", "Missing information");
                 return false;
             }
+            else if (!Regex.IsMatch(txtMailAddress.Text, MailRegex) || !Regex.IsMatch(txtRecipient.Text, MailRegex))
+            {
+                MessageBox.Show($"Please insert a valid eMail address.{Environment.NewLine}Exampe: abc_123@transport_123.info", "Invalid eMail address", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             return true;
         }
 
         private void FillComboBox()
         {
-            cmbHost.Items.Add(new ComboBoxItem("Outlook", "live"));
+            cmbHost.Items.Add(new ComboBoxItem("Gmail", "gmail"));
             cmbHost.Items.Add(new ComboBoxItem("Hotmail", "live"));
+            cmbHost.Items.Add(new ComboBoxItem("Outlook", "live"));
             cmbHost.Items.Add(new ComboBoxItem("Bluewin", "live"));
-            cmbHost.Items.Add(new ComboBoxItem("GMail", "gmail"));
+            cmbHost.SelectedIndex = 0;
         }
         #endregion
     }

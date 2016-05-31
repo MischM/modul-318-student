@@ -30,10 +30,6 @@ namespace PublicTransportApp
             };
             AutocompleteTimer.Tick += AutocompleteTimer_Tick;
             AutoCompleteLoaded += this_AutoComplete;
-
-            dtpTime.Format = DateTimePickerFormat.Custom;
-            dtpTime.CustomFormat = "HH:mm";
-            dtpTime.ShowUpDown = true;
         }
 
         #endregion
@@ -71,11 +67,11 @@ namespace PublicTransportApp
             var date = dtpDate.Value;
             var time = dtpTime.Value;
             var isArrival = rdbArrival.Checked;
-            //todo error handling
+            //todo input handling
 
             CurrentConnections = Transport.GetConnectionsByDateTime(placeOfDeparture, destination, date, time, isArrival);
 
-            FillListView();
+            FillConnectionList();
         }
 
         /// <summary>
@@ -85,7 +81,16 @@ namespace PublicTransportApp
         /// <param name="e"></param>
         private void cmbStationSearch_TextChanged(object sender, EventArgs e)
         {
-            LastStationBox = (ComboBox)sender;
+            var box = (ComboBox)sender;
+            foreach (var item in box.Items)
+            {
+                if (item.ToString() == box.Text)
+                {
+                    return;
+                }
+            }
+
+            LastStationBox = box;
             LastStationText = LastStationBox.Text;
             AutocompleteTimer.Stop();
             AutocompleteTimer.Start();
@@ -141,6 +146,26 @@ namespace PublicTransportApp
             System.Diagnostics.Process.Start("https://www.google.ch/maps/place/" + station.Coordinate.XCoordinate + "," + station.Coordinate.YCoordinate + "/data=!3m1!1e3");
         }
 
+        private void btnSendMail_Click(object sender, EventArgs e)
+        {
+            var mail = new Mail(this);
+            mail.ShowDialog();
+        }
+
+        private void btnSearchNearestStations_Click(object sender, EventArgs e)
+        {
+            var stations = Transport.GetStations(cmbCurrentAddress.Text);
+
+            if (stations.StationList.Count != 1)
+            {
+                MessageBox.Show("Location cant be found.", "Location not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var nearStations = Transport.GetStations(stations.StationList[0].Coordinate.XCoordinate, stations.StationList[0].Coordinate.YCoordinate);
+
+        }
+
         #endregion
 
         #region Methods
@@ -149,7 +174,7 @@ namespace PublicTransportApp
         /// Displaying the Connections returned by the API to the ListView
         /// </summary>
         /// <param name="connections">Connections object</param>
-        private void FillListView()
+        private void FillConnectionList()
         {
             foreach (var connection in CurrentConnections.ConnectionList)
             {
@@ -178,10 +203,26 @@ namespace PublicTransportApp
         private void btnSearchStationboard_Click(object sender, EventArgs e)
         {
             UpdateStatusStrip("Loading");
+            Cursor = Cursors.WaitCursor;
             var stations = Transport.GetStations(cmbStationboard.Text);
-            var station = stations.StationList.Find(x => x.Name == cmbStationboard.Text);
-            var stationboard = Transport.GetStationBoard(station.Name, station.Id);
 
+            if (stations.StationList.Count != 1)
+            {
+                MessageBox.Show("Station cant be found.", "Station not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var stationboard = Transport.GetStationBoard(stations.StationList[0].Name, stations.StationList[0].Id);
+
+            FillStationList(stationboard);
+        }
+
+        /// <summary>
+        /// Load the stationboard ListView
+        /// </summary>
+        /// <param name="stationboard"></param>
+        private void FillStationList(StationBoardRoot stationboard)
+        {
             foreach (var entry in stationboard.Entries)
             {
                 var subitems = new[]
@@ -193,6 +234,7 @@ namespace PublicTransportApp
                 var item = new ListViewItem(subitems);
                 lsvStationboard.Items.Add(item);
             }
+            Cursor = Cursors.Default;
             UpdateStatusStrip("Ready");
         }
 
@@ -204,11 +246,6 @@ namespace PublicTransportApp
 
         #endregion
 
-        private void btnSendMail_Click(object sender, EventArgs e)
-        {
-            var mail= new Mail(this);
-            mail.ShowDialog();
-        }
     }
 
     /// <summary>

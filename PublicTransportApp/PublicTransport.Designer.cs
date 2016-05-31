@@ -31,9 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PublicTransport));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabStart = new System.Windows.Forms.TabPage();
+            this.btnNearestStation = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabConnection = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnSendMail = new System.Windows.Forms.Button();
             this.llbTo = new System.Windows.Forms.LinkLabel();
             this.llbFrom = new System.Windows.Forms.LinkLabel();
             this.rdbArrival = new System.Windows.Forms.RadioButton();
@@ -48,6 +51,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnSendMail = new System.Windows.Forms.Button();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -74,7 +78,16 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslStatusStationboards = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tabNearestStation = new System.Windows.Forms.TabPage();
+            this.cmbCurrentAddress = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtNearestStation = new System.Windows.Forms.TextBox();
+            this.btnSearchNearestStations = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
+            this.tabStart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -87,6 +100,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.tabNearestStation.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -94,21 +108,69 @@
             this.tabControl1.Controls.Add(this.tabStart);
             this.tabControl1.Controls.Add(this.tabConnection);
             this.tabControl1.Controls.Add(this.tabStation);
+            this.tabControl1.Controls.Add(this.tabNearestStation);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(707, 628);
+            this.tabControl1.Size = new System.Drawing.Size(683, 613);
             this.tabControl1.TabIndex = 1;
             // 
             // tabStart
             // 
+            this.tabStart.Controls.Add(this.btnNearestStation);
+            this.tabStart.Controls.Add(this.label9);
+            this.tabStart.Controls.Add(this.label8);
+            this.tabStart.Controls.Add(this.pictureBox1);
             this.tabStart.Location = new System.Drawing.Point(4, 22);
             this.tabStart.Name = "tabStart";
-            this.tabStart.Size = new System.Drawing.Size(699, 602);
+            this.tabStart.Size = new System.Drawing.Size(675, 587);
             this.tabStart.TabIndex = 2;
             this.tabStart.Text = "Start";
             this.tabStart.UseVisualStyleBackColor = true;
+            // 
+            // btnNearestStation
+            // 
+            this.btnNearestStation.Location = new System.Drawing.Point(467, 71);
+            this.btnNearestStation.Name = "btnNearestStation";
+            this.btnNearestStation.Size = new System.Drawing.Size(200, 29);
+            this.btnNearestStation.TabIndex = 3;
+            this.btnNearestStation.Text = "Find nearest station";
+            this.btnNearestStation.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(8, 29);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(625, 39);
+            this.label9.TabIndex = 2;
+            this.label9.Text = resources.GetString("label9.Text");
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.LimeGreen;
+            this.label8.Location = new System.Drawing.Point(224, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(209, 29);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Public transport app";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(8, 253);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(659, 225);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // tabConnection
             // 
@@ -116,7 +178,7 @@
             this.tabConnection.Location = new System.Drawing.Point(4, 22);
             this.tabConnection.Name = "tabConnection";
             this.tabConnection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConnection.Size = new System.Drawing.Size(699, 602);
+            this.tabConnection.Size = new System.Drawing.Size(675, 587);
             this.tabConnection.TabIndex = 0;
             this.tabConnection.Text = "Search Connection";
             this.tabConnection.UseVisualStyleBackColor = true;
@@ -130,7 +192,6 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.btnSendMail);
             this.splitContainer1.Panel1.Controls.Add(this.llbTo);
             this.splitContainer1.Panel1.Controls.Add(this.llbFrom);
             this.splitContainer1.Panel1.Controls.Add(this.rdbArrival);
@@ -148,21 +209,12 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnSendMail);
             this.splitContainer1.Panel2.Controls.Add(this.statusStrip2);
             this.splitContainer1.Panel2.Controls.Add(this.lsvConnections);
-            this.splitContainer1.Size = new System.Drawing.Size(693, 596);
-            this.splitContainer1.SplitterDistance = 254;
+            this.splitContainer1.Size = new System.Drawing.Size(669, 581);
+            this.splitContainer1.SplitterDistance = 246;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // btnSendMail
-            // 
-            this.btnSendMail.Location = new System.Drawing.Point(5, 231);
-            this.btnSendMail.Name = "btnSendMail";
-            this.btnSendMail.Size = new System.Drawing.Size(116, 21);
-            this.btnSendMail.TabIndex = 16;
-            this.btnSendMail.Text = "Send per Mail";
-            this.btnSendMail.UseVisualStyleBackColor = true;
-            this.btnSendMail.Click += new System.EventHandler(this.btnSendMail_Click);
             // 
             // llbTo
             // 
@@ -189,7 +241,7 @@
             // rdbArrival
             // 
             this.rdbArrival.AutoSize = true;
-            this.rdbArrival.Location = new System.Drawing.Point(419, 144);
+            this.rdbArrival.Location = new System.Drawing.Point(177, 206);
             this.rdbArrival.Name = "rdbArrival";
             this.rdbArrival.Size = new System.Drawing.Size(54, 17);
             this.rdbArrival.TabIndex = 13;
@@ -200,12 +252,12 @@
             // 
             this.rdbDeparture.AutoSize = true;
             this.rdbDeparture.Checked = true;
-            this.rdbDeparture.Location = new System.Drawing.Point(327, 144);
+            this.rdbDeparture.Location = new System.Drawing.Point(177, 183);
             this.rdbDeparture.Name = "rdbDeparture";
-            this.rdbDeparture.Size = new System.Drawing.Size(86, 17);
+            this.rdbDeparture.Size = new System.Drawing.Size(72, 17);
             this.rdbDeparture.TabIndex = 12;
             this.rdbDeparture.TabStop = true;
-            this.rdbDeparture.Text = "Departure Or";
+            this.rdbDeparture.Text = "Departure";
             this.rdbDeparture.UseVisualStyleBackColor = true;
             // 
             // cmbTo
@@ -229,7 +281,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(479, 146);
+            this.label5.Location = new System.Drawing.Point(21, 185);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 13);
             this.label5.TabIndex = 11;
@@ -237,7 +289,8 @@
             // 
             // btnSearchConnection
             // 
-            this.btnSearchConnection.Location = new System.Drawing.Point(431, 194);
+            this.btnSearchConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearchConnection.Location = new System.Drawing.Point(469, 215);
             this.btnSearchConnection.Name = "btnSearchConnection";
             this.btnSearchConnection.Size = new System.Drawing.Size(200, 29);
             this.btnSearchConnection.TabIndex = 4;
@@ -247,11 +300,13 @@
             // 
             // dtpTime
             // 
-            this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTime.Location = new System.Drawing.Point(515, 139);
+            this.dtpTime.CustomFormat = "HH:mm";
+            this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpTime.Location = new System.Drawing.Point(86, 179);
             this.dtpTime.MinDate = new System.DateTime(2016, 1, 1, 0, 0, 0, 0);
             this.dtpTime.Name = "dtpTime";
-            this.dtpTime.Size = new System.Drawing.Size(116, 20);
+            this.dtpTime.ShowUpDown = true;
+            this.dtpTime.Size = new System.Drawing.Size(61, 20);
             this.dtpTime.TabIndex = 3;
             // 
             // dtpDate
@@ -264,7 +319,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 146);
+            this.label4.Location = new System.Drawing.Point(21, 145);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(30, 13);
             this.label4.TabIndex = 3;
@@ -299,22 +354,33 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Connection";
             // 
+            // btnSendMail
+            // 
+            this.btnSendMail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSendMail.Location = new System.Drawing.Point(548, 285);
+            this.btnSendMail.Name = "btnSendMail";
+            this.btnSendMail.Size = new System.Drawing.Size(116, 21);
+            this.btnSendMail.TabIndex = 16;
+            this.btnSendMail.Text = "Send per Mail";
+            this.btnSendMail.UseVisualStyleBackColor = true;
+            this.btnSendMail.Click += new System.EventHandler(this.btnSendMail_Click);
+            // 
             // statusStrip2
             // 
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.tslStatus});
-            this.statusStrip2.Location = new System.Drawing.Point(0, 316);
+            this.statusStrip2.Location = new System.Drawing.Point(0, 309);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(693, 22);
+            this.statusStrip2.Size = new System.Drawing.Size(669, 22);
             this.statusStrip2.TabIndex = 1;
             this.statusStrip2.Text = "statusStrip2";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(598, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(573, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -326,11 +392,14 @@
             // tslStatus
             // 
             this.tslStatus.Name = "tslStatus";
-            this.tslStatus.Size = new System.Drawing.Size(38, 17);
+            this.tslStatus.Size = new System.Drawing.Size(39, 17);
             this.tslStatus.Text = "Ready";
             // 
             // lsvConnections
             // 
+            this.lsvConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lsvConnections.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6,
             this.columnHeader1,
@@ -339,10 +408,9 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader5});
-            this.lsvConnections.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsvConnections.Location = new System.Drawing.Point(0, 0);
             this.lsvConnections.Name = "lsvConnections";
-            this.lsvConnections.Size = new System.Drawing.Size(693, 338);
+            this.lsvConnections.Size = new System.Drawing.Size(664, 279);
             this.lsvConnections.TabIndex = 0;
             this.lsvConnections.UseCompatibleStateImageBehavior = false;
             this.lsvConnections.View = System.Windows.Forms.View.Details;
@@ -391,7 +459,7 @@
             this.tabStation.Location = new System.Drawing.Point(4, 22);
             this.tabStation.Name = "tabStation";
             this.tabStation.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStation.Size = new System.Drawing.Size(699, 602);
+            this.tabStation.Size = new System.Drawing.Size(675, 587);
             this.tabStation.TabIndex = 1;
             this.tabStation.Text = "Search Station";
             this.tabStation.UseVisualStyleBackColor = true;
@@ -414,13 +482,14 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.lsvStationboard);
-            this.splitContainer2.Size = new System.Drawing.Size(693, 574);
-            this.splitContainer2.SplitterDistance = 286;
+            this.splitContainer2.Size = new System.Drawing.Size(669, 559);
+            this.splitContainer2.SplitterDistance = 278;
             this.splitContainer2.TabIndex = 5;
             // 
             // btnSearchStationboard
             // 
-            this.btnSearchStationboard.Location = new System.Drawing.Point(474, 88);
+            this.btnSearchStationboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearchStationboard.Location = new System.Drawing.Point(464, 87);
             this.btnSearchStationboard.Name = "btnSearchStationboard";
             this.btnSearchStationboard.Size = new System.Drawing.Size(200, 29);
             this.btnSearchStationboard.TabIndex = 3;
@@ -466,7 +535,7 @@
             this.lsvStationboard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsvStationboard.Location = new System.Drawing.Point(0, 0);
             this.lsvStationboard.Name = "lsvStationboard";
-            this.lsvStationboard.Size = new System.Drawing.Size(693, 284);
+            this.lsvStationboard.Size = new System.Drawing.Size(669, 277);
             this.lsvStationboard.TabIndex = 1;
             this.lsvStationboard.UseCompatibleStateImageBehavior = false;
             this.lsvStationboard.View = System.Windows.Forms.View.Details;
@@ -492,16 +561,16 @@
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel4,
             this.tslStatusStationboards});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 577);
+            this.statusStrip1.Location = new System.Drawing.Point(3, 562);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(693, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(669, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(598, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(573, 17);
             this.toolStripStatusLabel3.Spring = true;
             // 
             // toolStripStatusLabel4
@@ -513,19 +582,95 @@
             // tslStatusStationboards
             // 
             this.tslStatusStationboards.Name = "tslStatusStationboards";
-            this.tslStatusStationboards.Size = new System.Drawing.Size(38, 17);
+            this.tslStatusStationboards.Size = new System.Drawing.Size(39, 17);
             this.tslStatusStationboards.Text = "Ready";
+            // 
+            // tabNearestStation
+            // 
+            this.tabNearestStation.Controls.Add(this.cmbCurrentAddress);
+            this.tabNearestStation.Controls.Add(this.label12);
+            this.tabNearestStation.Controls.Add(this.txtNearestStation);
+            this.tabNearestStation.Controls.Add(this.btnSearchNearestStations);
+            this.tabNearestStation.Controls.Add(this.label11);
+            this.tabNearestStation.Controls.Add(this.label10);
+            this.tabNearestStation.Location = new System.Drawing.Point(4, 22);
+            this.tabNearestStation.Name = "tabNearestStation";
+            this.tabNearestStation.Padding = new System.Windows.Forms.Padding(3);
+            this.tabNearestStation.Size = new System.Drawing.Size(675, 587);
+            this.tabNearestStation.TabIndex = 3;
+            this.tabNearestStation.Text = "Search Nearest Station";
+            this.tabNearestStation.UseVisualStyleBackColor = true;
+            // 
+            // cmbCurrentAddress
+            // 
+            this.cmbCurrentAddress.FormattingEnabled = true;
+            this.cmbCurrentAddress.Location = new System.Drawing.Point(107, 60);
+            this.cmbCurrentAddress.Name = "cmbCurrentAddress";
+            this.cmbCurrentAddress.Size = new System.Drawing.Size(200, 21);
+            this.cmbCurrentAddress.TabIndex = 7;
+            this.cmbCurrentAddress.TextChanged += new System.EventHandler(this.cmbStationSearch_TextChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.LimeGreen;
+            this.label12.Location = new System.Drawing.Point(258, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(178, 29);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "Nearest stations";
+            // 
+            // txtNearestStation
+            // 
+            this.txtNearestStation.Location = new System.Drawing.Point(107, 122);
+            this.txtNearestStation.Name = "txtNearestStation";
+            this.txtNearestStation.ReadOnly = true;
+            this.txtNearestStation.Size = new System.Drawing.Size(200, 20);
+            this.txtNearestStation.TabIndex = 3;
+            // 
+            // btnSearchNearestStations
+            // 
+            this.btnSearchNearestStations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearchNearestStations.Location = new System.Drawing.Point(351, 57);
+            this.btnSearchNearestStations.Name = "btnSearchNearestStations";
+            this.btnSearchNearestStations.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchNearestStations.TabIndex = 5;
+            this.btnSearchNearestStations.Text = "Search";
+            this.btnSearchNearestStations.UseVisualStyleBackColor = true;
+            this.btnSearchNearestStations.Click += new System.EventHandler(this.btnSearchNearestStations_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(20, 125);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(81, 13);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Nearest station:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(20, 63);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(81, 13);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Current address";
             // 
             // PublicTransport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 628);
+            this.ClientSize = new System.Drawing.Size(683, 613);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PublicTransport";
             this.Text = "Public Transport App";
             this.tabControl1.ResumeLayout(false);
+            this.tabStart.ResumeLayout(false);
+            this.tabStart.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabConnection.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -544,6 +689,8 @@
             this.splitContainer2.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.tabNearestStation.ResumeLayout(false);
+            this.tabNearestStation.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -594,6 +741,17 @@
         private System.Windows.Forms.LinkLabel llbTo;
         private System.Windows.Forms.LinkLabel llbFrom;
         private System.Windows.Forms.Button btnSendMail;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnNearestStation;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TabPage tabNearestStation;
+        private System.Windows.Forms.Button btnSearchNearestStations;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtNearestStation;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox cmbCurrentAddress;
     }
 }
 

@@ -7,9 +7,32 @@ namespace SwissTransport
 {
     public class Transport : ITransport
     {
+        // Changed to avoid redundancy with the overload method 
         public Stations GetStations(string query)
         {
             var request = CreateWebRequest("http://transport.opendata.ch/v1/locations?query=" + query);
+            return GetStations(request);
+        }
+
+        /// <summary>
+        /// Overload method of GetStations for x and y coordinates
+        /// </summary>
+        /// <param name="x">x-coordinate</param>
+        /// <param name="y">y-coordinate</param>
+        /// <returns></returns>
+        public Stations GetStations(double x, double y)
+        {
+            var request = CreateWebRequest("http://transport.opendata.ch/v1/locations?x=" + x + "&y=" + y);
+            return GetStations(request);
+        }
+
+        /// <summary>
+        /// Common method for loading stations from the API
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        private Stations GetStations(WebRequest request)
+        {
             var response = request.GetResponse();
             var responseStream = response.GetResponseStream();
 
