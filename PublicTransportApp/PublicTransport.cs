@@ -60,14 +60,14 @@ namespace PublicTransportApp
         private void btnSearchConnection_Click(object sender, EventArgs e)
         {
             UpdateStatusStrip("Loading");
+            Cursor = Cursors.WaitCursor;
             lsvConnections.Items.Clear();
 
-            var placeOfDeparture = cmbFrom.Text ?? "";
-            var destination = cmbTo.Text ?? "";
+            var placeOfDeparture = cmbFrom.Text;
+            var destination = cmbTo.Text;
             var date = dtpDate.Value;
             var time = dtpTime.Value;
             var isArrival = rdbArrival.Checked;
-            //todo input handling
 
             CurrentConnections = Transport.GetConnectionsByDateTime(placeOfDeparture, destination, date, time, isArrival);
 
@@ -143,7 +143,14 @@ namespace PublicTransportApp
             var stations = Transport.GetStations(stationName);
             var station = stations.StationList.Find(x => x.Name == stationName);
 
-            System.Diagnostics.Process.Start("https://www.google.ch/maps/place/" + station.Coordinate.XCoordinate + "," + station.Coordinate.YCoordinate + "/data=!3m1!1e3");
+            try
+            {
+                System.Diagnostics.Process.Start("https://www.google.ch/maps/place/" + station.Coordinate.XCoordinate + "," + station.Coordinate.YCoordinate + "/data=!3m1!1e3");
+            }
+            catch
+            {
+                MessageBox.Show($"Google Maps can't be opend right now.{Environment.NewLine}Please check your input and try again.", "Cant open Google maps", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -171,6 +178,7 @@ namespace PublicTransportApp
         {
             UpdateStatusStrip("Loading");
             Cursor = Cursors.WaitCursor;
+            lsvStationboard.Items.Clear();
             var stations = Transport.GetStations(cmbStationboard.Text);
 
             if (stations.StationList.Count != 1)
@@ -193,6 +201,7 @@ namespace PublicTransportApp
         {
             UpdateStatusStrip("Loading");
             Cursor = Cursors.WaitCursor;
+            lsvNearestStations.Items.Clear();
 
             var stations = Transport.GetStations(cmbCurrentAddress.Text);
 
@@ -221,10 +230,10 @@ namespace PublicTransportApp
                 var subitems = new[] {
                     connection.From.Station.Name,
                     DateTime.Parse(connection.From.Departure).ToShortTimeString(),
-                    connection.From.Platform,
+                    (connection.From.Platform!="") ?connection.From.Platform: "Bus station",
                     connection.To.Station.Name,
                     DateTime.Parse(connection.To.Arrival).ToShortTimeString(),
-                    connection.To.Platform,
+                    (connection.To.Platform != "") ? connection.To.Platform:"Bus station",
                 // Duration gets delivered in the Following Format: 00d11:22:33, where the 0=d, 1=h, 2=m and 3=s
                 // https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx
                     TimeSpan.ParseExact(connection.Duration, @"dd\dhh\:mm\:ss", null).ToString(@"hh\:mm"),
@@ -232,6 +241,7 @@ namespace PublicTransportApp
                 var item = new ListViewItem(subitems);
                 lsvConnections.Items.Add(item);
             }
+            Cursor = Cursors.Default;
             UpdateStatusStrip("Ready");
         }
 

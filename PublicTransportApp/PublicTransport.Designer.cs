@@ -141,7 +141,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(8, 43);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(625, 39);
+            this.label9.Size = new System.Drawing.Size(651, 39);
             this.label9.TabIndex = 2;
             this.label9.Text = resources.GetString("label9.Text");
             // 
@@ -402,8 +402,8 @@
             this.columnHeader4,
             this.columnHeader7,
             this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader5});
+            this.columnHeader5,
+            this.columnHeader3});
             this.lsvConnections.Location = new System.Drawing.Point(0, 0);
             this.lsvConnections.Name = "lsvConnections";
             this.lsvConnections.Size = new System.Drawing.Size(664, 279);
