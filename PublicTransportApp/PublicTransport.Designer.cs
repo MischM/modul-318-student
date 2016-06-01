@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PublicTransport));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabStart = new System.Windows.Forms.TabPage();
-            this.btnNearestStation = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -79,12 +78,18 @@
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslStatusStationboards = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabNearestStation = new System.Windows.Forms.TabPage();
+            this.lsvNearestStations = new System.Windows.Forms.ListView();
             this.cmbCurrentAddress = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.txtNearestStation = new System.Windows.Forms.TextBox();
             this.btnSearchNearestStations = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.statusStrip3 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tslStatusNearest = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1.SuspendLayout();
             this.tabStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -101,6 +106,7 @@
             this.splitContainer2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabNearestStation.SuspendLayout();
+            this.statusStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -118,7 +124,6 @@
             // 
             // tabStart
             // 
-            this.tabStart.Controls.Add(this.btnNearestStation);
             this.tabStart.Controls.Add(this.label9);
             this.tabStart.Controls.Add(this.label8);
             this.tabStart.Controls.Add(this.pictureBox1);
@@ -129,21 +134,12 @@
             this.tabStart.Text = "Start";
             this.tabStart.UseVisualStyleBackColor = true;
             // 
-            // btnNearestStation
-            // 
-            this.btnNearestStation.Location = new System.Drawing.Point(467, 71);
-            this.btnNearestStation.Name = "btnNearestStation";
-            this.btnNearestStation.Size = new System.Drawing.Size(200, 29);
-            this.btnNearestStation.TabIndex = 3;
-            this.btnNearestStation.Text = "Find nearest station";
-            this.btnNearestStation.UseVisualStyleBackColor = true;
-            // 
             // label9
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 29);
+            this.label9.Location = new System.Drawing.Point(8, 43);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(625, 39);
             this.label9.TabIndex = 2;
@@ -154,7 +150,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.LimeGreen;
-            this.label8.Location = new System.Drawing.Point(224, 0);
+            this.label8.Location = new System.Drawing.Point(224, 9);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(209, 29);
             this.label8.TabIndex = 1;
@@ -380,7 +376,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(573, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(574, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -392,7 +388,7 @@
             // tslStatus
             // 
             this.tslStatus.Name = "tslStatus";
-            this.tslStatus.Size = new System.Drawing.Size(39, 17);
+            this.tslStatus.Size = new System.Drawing.Size(38, 17);
             this.tslStatus.Text = "Ready";
             // 
             // lsvConnections
@@ -570,7 +566,7 @@
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(573, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(574, 17);
             this.toolStripStatusLabel3.Spring = true;
             // 
             // toolStripStatusLabel4
@@ -582,14 +578,15 @@
             // tslStatusStationboards
             // 
             this.tslStatusStationboards.Name = "tslStatusStationboards";
-            this.tslStatusStationboards.Size = new System.Drawing.Size(39, 17);
+            this.tslStatusStationboards.Size = new System.Drawing.Size(38, 17);
             this.tslStatusStationboards.Text = "Ready";
             // 
             // tabNearestStation
             // 
+            this.tabNearestStation.Controls.Add(this.statusStrip3);
+            this.tabNearestStation.Controls.Add(this.lsvNearestStations);
             this.tabNearestStation.Controls.Add(this.cmbCurrentAddress);
             this.tabNearestStation.Controls.Add(this.label12);
-            this.tabNearestStation.Controls.Add(this.txtNearestStation);
             this.tabNearestStation.Controls.Add(this.btnSearchNearestStations);
             this.tabNearestStation.Controls.Add(this.label11);
             this.tabNearestStation.Controls.Add(this.label10);
@@ -601,13 +598,28 @@
             this.tabNearestStation.Text = "Search Nearest Station";
             this.tabNearestStation.UseVisualStyleBackColor = true;
             // 
+            // lsvNearestStations
+            // 
+            this.lsvNearestStations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lsvNearestStations.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader18,
+            this.columnHeader19});
+            this.lsvNearestStations.Location = new System.Drawing.Point(3, 182);
+            this.lsvNearestStations.Name = "lsvNearestStations";
+            this.lsvNearestStations.Size = new System.Drawing.Size(664, 377);
+            this.lsvNearestStations.TabIndex = 2;
+            this.lsvNearestStations.UseCompatibleStateImageBehavior = false;
+            this.lsvNearestStations.View = System.Windows.Forms.View.Details;
+            // 
             // cmbCurrentAddress
             // 
             this.cmbCurrentAddress.FormattingEnabled = true;
             this.cmbCurrentAddress.Location = new System.Drawing.Point(107, 60);
             this.cmbCurrentAddress.Name = "cmbCurrentAddress";
             this.cmbCurrentAddress.Size = new System.Drawing.Size(200, 21);
-            this.cmbCurrentAddress.TabIndex = 7;
+            this.cmbCurrentAddress.TabIndex = 0;
             this.cmbCurrentAddress.TextChanged += new System.EventHandler(this.cmbStationSearch_TextChanged);
             // 
             // label12
@@ -621,21 +633,13 @@
             this.label12.TabIndex = 6;
             this.label12.Text = "Nearest stations";
             // 
-            // txtNearestStation
-            // 
-            this.txtNearestStation.Location = new System.Drawing.Point(107, 122);
-            this.txtNearestStation.Name = "txtNearestStation";
-            this.txtNearestStation.ReadOnly = true;
-            this.txtNearestStation.Size = new System.Drawing.Size(200, 20);
-            this.txtNearestStation.TabIndex = 3;
-            // 
             // btnSearchNearestStations
             // 
             this.btnSearchNearestStations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearchNearestStations.Location = new System.Drawing.Point(351, 57);
             this.btnSearchNearestStations.Name = "btnSearchNearestStations";
             this.btnSearchNearestStations.Size = new System.Drawing.Size(75, 23);
-            this.btnSearchNearestStations.TabIndex = 5;
+            this.btnSearchNearestStations.TabIndex = 1;
             this.btnSearchNearestStations.Text = "Search";
             this.btnSearchNearestStations.UseVisualStyleBackColor = true;
             this.btnSearchNearestStations.Click += new System.EventHandler(this.btnSearchNearestStations_Click);
@@ -643,11 +647,11 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(20, 125);
+            this.label11.Location = new System.Drawing.Point(20, 166);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(81, 13);
+            this.label11.Size = new System.Drawing.Size(86, 13);
             this.label11.TabIndex = 2;
-            this.label11.Text = "Nearest station:";
+            this.label11.Text = "Nearest stations:";
             // 
             // label10
             // 
@@ -657,6 +661,46 @@
             this.label10.Size = new System.Drawing.Size(81, 13);
             this.label10.TabIndex = 1;
             this.label10.Text = "Current address";
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "Station name";
+            this.columnHeader18.Width = 150;
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "Distance in meter";
+            this.columnHeader19.Width = 100;
+            // 
+            // statusStrip3
+            // 
+            this.statusStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel5,
+            this.toolStripStatusLabel6,
+            this.tslStatusNearest});
+            this.statusStrip3.Location = new System.Drawing.Point(3, 562);
+            this.statusStrip3.Name = "statusStrip3";
+            this.statusStrip3.Size = new System.Drawing.Size(669, 22);
+            this.statusStrip3.TabIndex = 9;
+            this.statusStrip3.Text = "statusStrip3";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(574, 17);
+            this.toolStripStatusLabel5.Spring = true;
+            // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(42, 17);
+            this.toolStripStatusLabel6.Text = "Status:";
+            // 
+            // tslStatusNearest
+            // 
+            this.tslStatusNearest.Name = "tslStatusNearest";
+            this.tslStatusNearest.Size = new System.Drawing.Size(38, 17);
+            this.tslStatusNearest.Text = "Ready";
             // 
             // PublicTransport
             // 
@@ -691,6 +735,8 @@
             this.statusStrip1.PerformLayout();
             this.tabNearestStation.ResumeLayout(false);
             this.tabNearestStation.PerformLayout();
+            this.statusStrip3.ResumeLayout(false);
+            this.statusStrip3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -743,15 +789,20 @@
         private System.Windows.Forms.Button btnSendMail;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnNearestStation;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TabPage tabNearestStation;
         private System.Windows.Forms.Button btnSearchNearestStations;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtNearestStation;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmbCurrentAddress;
+        private System.Windows.Forms.ListView lsvNearestStations;
+        private System.Windows.Forms.ColumnHeader columnHeader18;
+        private System.Windows.Forms.ColumnHeader columnHeader19;
+        private System.Windows.Forms.StatusStrip statusStrip3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel tslStatusNearest;
     }
 }
 

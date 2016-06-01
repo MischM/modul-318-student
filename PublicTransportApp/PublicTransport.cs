@@ -146,24 +146,64 @@ namespace PublicTransportApp
             System.Diagnostics.Process.Start("https://www.google.ch/maps/place/" + station.Coordinate.XCoordinate + "," + station.Coordinate.YCoordinate + "/data=!3m1!1e3");
         }
 
+        /// <summary>
+        /// Open new Mail form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSendMail_Click(object sender, EventArgs e)
         {
+            if (this.CurrentConnections == null)
+            {
+                MessageBox.Show("There were no connections searched. Please search a connection first.", "No connection searched", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             var mail = new Mail(this);
             mail.ShowDialog();
         }
 
+        /// <summary>
+        /// Load the statioboard
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSearchStationboard_Click(object sender, EventArgs e)
+        {
+            UpdateStatusStrip("Loading");
+            Cursor = Cursors.WaitCursor;
+            var stations = Transport.GetStations(cmbStationboard.Text);
+
+            if (stations.StationList.Count != 1)
+            {
+                MessageBox.Show("Station cant be found.", "Station not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var stationboard = Transport.GetStationBoard(stations.StationList[0].Name, stations.StationList[0].Id);
+
+            FillStationList(stationboard);
+        }
+
+        /// <summary>
+        /// Displays the nearest connections
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearchNearestStations_Click(object sender, EventArgs e)
         {
+            UpdateStatusStrip("Loading");
+            Cursor = Cursors.WaitCursor;
+
             var stations = Transport.GetStations(cmbCurrentAddress.Text);
 
             if (stations.StationList.Count != 1)
             {
-                MessageBox.Show("Location cant be found.", "Location not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Location can't be found.", "Location not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             var nearStations = Transport.GetStations(stations.StationList[0].Coordinate.XCoordinate, stations.StationList[0].Coordinate.YCoordinate);
-
+            FillNearestStationsList(nearStations);
         }
 
         #endregion
@@ -196,28 +236,6 @@ namespace PublicTransportApp
         }
 
         /// <summary>
-        /// Load the statioboard
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnSearchStationboard_Click(object sender, EventArgs e)
-        {
-            UpdateStatusStrip("Loading");
-            Cursor = Cursors.WaitCursor;
-            var stations = Transport.GetStations(cmbStationboard.Text);
-
-            if (stations.StationList.Count != 1)
-            {
-                MessageBox.Show("Station cant be found.", "Station not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var stationboard = Transport.GetStationBoard(stations.StationList[0].Name, stations.StationList[0].Id);
-
-            FillStationList(stationboard);
-        }
-
-        /// <summary>
         /// Load the stationboard ListView
         /// </summary>
         /// <param name="stationboard"></param>
@@ -238,10 +256,30 @@ namespace PublicTransportApp
             UpdateStatusStrip("Ready");
         }
 
+        /// <summary>
+        /// Load the stations in the ListView for the nearest stations
+        /// </summary>
+        /// <param name="stations"></param>
+        private void FillNearestStationsList(Stations stations)
+        {
+            foreach (var station in stations.StationList)
+            {
+                var subitems = new[] {
+                    station.Name,
+                    station.Distance.ToString()
+                };
+                var item = new ListViewItem(subitems);
+                lsvNearestStations.Items.Add(item);
+            }
+            Cursor = Cursors.Default;
+            UpdateStatusStrip("Ready");
+        }
+
         private void UpdateStatusStrip(string status)
         {
             tslStatus.Text = status;
             tslStatusStationboards.Text = status;
+            tslStatusNearest.Text = status;
         }
 
         #endregion
